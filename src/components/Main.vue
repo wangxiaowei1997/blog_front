@@ -2,7 +2,6 @@
   <div id="main">
     <h2>Ele</h2>
 
-
     <div class="line"></div>
     <!--导航栏-->
     <el-menu
@@ -88,57 +87,57 @@
 
 <script type="text/javascript">
 export default {
-  data() {
+  data () {
     return {
       activeIndex2: '1',
       tableData: [{
         date: '2016-05-02',
         book_name: '《银河帝国》',
         book_price: 56.5,
-        book_id:1001
+        book_id: 1001
       }],
-      dialogFormVisible:false,
+      dialogFormVisible: false,
       form: {
         date: '',
         book_name: '',
         book_price: 0,
-        book_id:0
+        book_id: 0
 
       },
       formLabelWidth: '120px'
-    };
+    }
   },
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+    handleSelect (key, keyPath) {
+      console.log(key, keyPath)
     },
-    getList(){
+    getList () {
       this.$axios.get('/centos/book/list'
-        ,{headers:{
-            'Token':this.$store.state.Authorization
-          }}
+        , {headers: {
+          'Token': this.$store.state.Authorization
+        }}
       )
-        .then((res)=>{
+        .then((res) => {
           console.log(res.data)
           this.tableData = res.data
         })
     },
-    dialogCreate(data){
+    dialogCreate (data) {
       this.dialogFormVisible = true
       console.log(data)
-      this.form.book_id=data.book_id
+      this.form.book_id = data.book_id
       this.form.book_name = data.book_name
       this.form.book_price = data.book_price
-      this.form.date =data.date
+      this.form.date = data.date
     },
-    editTableListDetails(form){
+    editTableListDetails (form) {
       this.dialogFormVisible = false
       console.log(form)
       let data = {
-        book_id:form.book_id,
-        book_name:form.book_name,
-        book_price:form.book_price,
-        date:form.date
+        book_id: form.book_id,
+        book_name: form.book_name,
+        book_price: form.book_price,
+        date: form.date
       }
 
       this.$axios.post('/centos/book/update'
@@ -154,7 +153,7 @@ export default {
     }
 
   },
-  created(){
+  created () {
     this.getList()
   }
 }

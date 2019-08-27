@@ -12,7 +12,7 @@ const router = new Router({
       path: '/',
       name: 'Login',
       component: Login
-    },{
+    }, {
       path: '/main',
       name: 'Main',
       component: Main
@@ -20,27 +20,24 @@ const router = new Router({
   ]
 })
 
-export default router;
-
+export default router
 
 router.beforeEach((to, from, next) => {
-  let token = localStorage.getItem('Authorization');
-  console.log('token: '+token)
+  let token = localStorage.getItem('Authorization')
+  console.log('token: ' + token)
   // console.log('token.length: '+token.length)
-  console.log(token===null)
-
+  console.log(token === null)
 
   if (to.path === '/') {
-    if(token!== null && token!== 'null' && token.length > 10){
-      next('/main');
+    if (token !== null && token !== 'null' && token.length > 10) {
+      next('/main')
     }
-    next();
+    next()
   } else {
-    if (token === 'null' || token === ''||token===null) {
-      next('/');
+    if (token === 'null' || token === '' || token === null) {
+      next('/')
     } else {
-      next();
+      next()
     }
   }
-});
-
+})

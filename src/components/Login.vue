@@ -48,7 +48,7 @@ export default {
       if (!this.password) {
         this.$message.error('请输入密码')
       }
-      let data = {'username':this.userName,'password':this.password}
+      let data = {'username': this.userName, 'password': this.password}
       // this.$http.post('/centos/login',data).then((res)=>{console.log(res)
       //    let data = res.data;
       //    if(data.code ==='200'){
@@ -63,24 +63,23 @@ export default {
       // })
 
       this.$axios.post('/centos/login'
-        ,data
-        ,{headers:{
-           // 'Token':this.$store.state.Authorization,
-          'Content-Type':'application/json'
+        , data
+        , {headers: {
+          // 'Token':this.$store.state.Authorization,
+          'Content-Type': 'application/json'
         }}
-        )
-        .then((res)=>{
-         console.log(res.data)
-         let data = res.data;
-         if(data.code ==='200'){
-           console.log('卢本伟牛逼')
-           let token = data.data.Token
-           this.$store.commit("changeLogin",{Authorization:token})
-           console.log(this.$store.state)
+      )
+        .then((res) => {
+          console.log(res.data)
+          let data = res.data
+          if (data.code === '200') {
+            console.log('卢本伟牛逼')
+            let token = data.data.Token
+            this.$store.commit('changeLogin', {Authorization: token})
+            console.log(this.$store.state)
             this.$router.push('/main')
-
-         }
-      })
+          }
+        })
     }
   }
 }
