@@ -12,6 +12,11 @@
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b">
+      <el-menu-item>
+        <a href="http://127.0.0.1:8091">
+          <img src="//cdn2.jianshu.io/assets/web/nav-logo-4c7bbafe27adc892f3046e6978459bac.png" alt="Nav logo" height="56" width="100">
+        </a>
+      </el-menu-item>
       <el-menu-item index="1">处理中心</el-menu-item>
       <el-submenu index="2">
         <template slot="title">我的工作台</template>
@@ -29,57 +34,32 @@
       <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
     </el-menu>
     <!--表格-->
-      <el-table
-        :data="tableData"
-        stripe
-        style="width: 100%">
-        <el-table-column
-          prop="book_id"
-          label="编号"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="date"
-          label="日期"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="book_name"
-          label="书名"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="book_price"
-          label="价格">
-        </el-table-column>
-        <el-table-column
-          label="编辑">
-          <template slot-scope="scope">
-            <el-button type="text" @click="dialogCreate(scope.row)" class="el-icon-edit"></el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-      <!--对话框-->
-      <el-dialog title="编辑" :visible.sync="dialogFormVisible">
-        <el-form :model="form">
-          <el-form-item label="编号" :label-width="formLabelWidth">
-            <el-input v-model="form.book_id" autocomplete="off" readonly="readonly"></el-input>
-          </el-form-item>
-          <el-form-item label="书名" :label-width="formLabelWidth">
-            <el-input v-model="form.book_name" autocomplete="off"></el-input>
-          </el-form-item>
-          <el-form-item label="价格" :label-width="formLabelWidth">
-            <el-input v-model="form.book_price" autocomplete="off"></el-input>
-          </el-form-item>
-          <el-form-item label="日期" :label-width="formLabelWidth">
-            <el-input v-model="form.date" autocomplete="off"></el-input>
-          </el-form-item>
-        </el-form>
-        <div slot="footer" class="dialog-footer">
-          <el-button @click="dialogFormVisible = false">取 消</el-button>
-          <el-button type="primary" @click="editTableListDetails(form)">确 定</el-button>
-        </div>
-      </el-dialog>
+    <div v-for="(content) in msg1" :key="content.articleNo">
+      <el-row>
+        <hr style="height:1px;border:none;border-top:1px solid #555555;"/>
+      </el-row>
+      <el-row type="flex">
+        <el-col :span="6" :offset="6">
+          <div class="content" style="text-align: left">
+            <a class="title" @click="goToDetailPage(content.articleNo)" >
+              <b style="cursor: pointer">{{content.title}}</b>
+            </a>
+            <P class="description">
+              {{content.description}}
+            </P>
+          </div>
+        </el-col>
+        <el-col :span="3">
+          <img class="img-blur-done"
+               :src = 'content.imgUrl'
+               alt="120" height="98" width="148"
+               style="vertical-align: middle"/>
+        </el-col>
+      </el-row>
+      <el-row>
+        <hr style="height:1px;border:none;border-top:1px solid rgba(85,19,57,0.85);"/>
+      </el-row>
+    </div>
 
   </div>
 
@@ -89,22 +69,20 @@
 export default {
   data () {
     return {
-      activeIndex2: '1',
-      tableData: [{
-        date: '2016-05-02',
-        book_name: '《银河帝国》',
-        book_price: 56.5,
-        book_id: 1001
-      }],
-      dialogFormVisible: false,
-      form: {
-        date: '',
-        book_name: '',
-        book_price: 0,
-        book_id: 0
-
-      },
-      formLabelWidth: '120px'
+      msg1: [
+        {
+          title: '你最喜欢的食物是什么',
+          description: '小时候最期待的早饭，就是蛋炒饭。可是当时家里条件不宽裕',
+          imgUrl: 'https://upload-images.jianshu.io/upload_images/14108690-c128e0df84c4d7e7?imageMogr2/auto-orient/strip|imageView2/1/w/360/h/240',
+          articleNo: 123
+        },
+        {
+          title: '你最喜欢的女同学是谁',
+          description: '小时候，',
+          imgUrl: 'http://imgsrc.baidu.com/forum/w%3D580/sign=dde5e450482309f7e76fad1a420c0c39/e82b4c24ab18972b46a8f10ee8cd7b899f510a25.jpg',
+          articleNo: 456
+        }
+      ]
     }
   },
   methods: {
@@ -150,11 +128,15 @@ export default {
       ).then((res) => {
         console.log(res.data)
       })
+    },
+
+    goToDetailPage (no) {
+      this.$router.push({name: 'Detail', params: {articleNo: no}})
     }
 
   },
   created () {
-    this.getList()
+    // this.getList()
   }
 }
 </script>
@@ -163,4 +145,7 @@ export default {
 /*h1{*/
   /*max-font-size: 11;*/
 /*}*/
+  .title:hover{
+    text-decoration: underline;
+  }
 </style>

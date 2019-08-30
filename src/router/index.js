@@ -4,6 +4,7 @@ import Router from 'vue-router'
 // import Test01 from '@/components/Test01'
 import Login from '@/components/Login'
 import Main from '@/components/Main'
+import Detail from '@/components/Detail'
 Vue.use(Router)
 
 const router = new Router({
@@ -16,6 +17,10 @@ const router = new Router({
       path: '/main',
       name: 'Main',
       component: Main
+    }, {
+      path: '/detail',
+      name: 'Detail',
+      component: Detail
     }
   ]
 })
