@@ -74,13 +74,13 @@ export default {
           title: '你最喜欢的食物是什么',
           description: '小时候最期待的早饭，就是蛋炒饭。可是当时家里条件不宽裕',
           imgUrl: 'https://upload-images.jianshu.io/upload_images/14108690-c128e0df84c4d7e7?imageMogr2/auto-orient/strip|imageView2/1/w/360/h/240',
-          articleNo: 123
+          articleNo: 'sn5400'
         },
         {
           title: '你最喜欢的女同学是谁',
           description: '小时候，',
           imgUrl: 'http://imgsrc.baidu.com/forum/w%3D580/sign=dde5e450482309f7e76fad1a420c0c39/e82b4c24ab18972b46a8f10ee8cd7b899f510a25.jpg',
-          articleNo: 456
+          articleNo: 'SN777901'
         }
       ]
     }
